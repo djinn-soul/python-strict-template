@@ -49,6 +49,9 @@ jobs:
       - name: Dead code (pyscn)
         run: uv run pyscn check .
 
+      - name: Static analysis (CytoScnPy)
+        run: uv run poe cytoscnpy-github
+
       - name: Duplicate code (pylint R0801)
         run: uv run pylint src/ --exit-zero
 

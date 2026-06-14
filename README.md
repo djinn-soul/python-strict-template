@@ -25,7 +25,7 @@ uv run poe quality
 | **Types**      | [BasedPyright](https://docs.basedpyright.com/) + [ty](https://github.com/astral-sh/ty)               | God-Mode type checking                            |
 | **Security**   | [Bandit](https://bandit.readthedocs.io/) + [Semgrep](https://semgrep.dev/)                           | Security analysis & Advanced rules                |
 | **Monitoring** | [pip-audit](https://pypi.org/project/pip-audit/) + [Secrets](https://github.com/Yelp/detect-secrets) | CVE scanning & Secret detection                   |
-| **Quality**    | [PyScn](https://github.com/j178/pyscn) + [Vulture](https://github.com/jendrikseipp/vulture)          | Quality scan + Dead code detection                |
+| **Quality**    | [CytoScnPy](https://pypi.org/project/cytoscnpy/) + [PyScn](https://github.com/j178/pyscn) + [Vulture](https://github.com/jendrikseipp/vulture) | Static analysis + quality scan + dead code detection |
 | **Testing**    | [Pytest](https://pytest.org/) + [Hypothesis](https://hypothesis.readthedocs.io/)                     | Unit + property-based testing                     |
 | **Runtime**    | [Pydantic](https://docs.pydantic.dev/) + [Beartype](https://beartype.readthedocs.io/)                | Data validation + type checking                   |
 
@@ -45,6 +45,10 @@ Use **Poe the Poet** (`poe`) for all tasks:
 ### Security & Compliance
 
 - `poe security`: Runs Bandit, Semgrep (Local + Auto), Pip-Audit, and Secrets scan.
+- `poe cytoscnpy`: Runs CytoScnPy with secrets, danger/taint, quality, clone detection, tests, and notebooks enabled through `[tool.cytoscnpy]`.
+- `poe cytoscnpy-deps`: Runs CytoScnPy dependency analysis as a separate report.
+- `poe cytoscnpy-markdown`: Runs CytoScnPy with Markdown report output.
+- `poe cytoscnpy-sarif`: Runs CytoScnPy with SARIF report output.
 - `poe test`: Runs unit tests with coverage.
 
 ### Full Quality Assurance
@@ -78,6 +82,7 @@ LLM-generated code often has common "slop" patterns that this toolchain is desig
 - [x] **Type mismatches** -> BasedPyright God-Mode + Beartype catch them.
 - [x] **Vague Docstrings** -> Ruff + Custom Semgrep rules enforce Google-style `Args:` and `Returns:`.
 - [x] **Security vulnerabilities** -> Bandit + Semgrep detect them.
+- [x] **Static analysis gaps** -> CytoScnPy checks dead code, danger patterns, secrets, and quality metrics.
 - [x] **Edge case bugs** -> Hypothesis finds them through property testing.
 - [x] **Hardcoded secrets** -> detect-secrets blocks them before they reach Git.
 

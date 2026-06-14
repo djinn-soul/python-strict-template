@@ -98,3 +98,50 @@ repos:
         language: system
         types: [python]
         pass_filenames: false
+
+      - id: cytoscnpy
+        name: cytoscnpy static analysis
+        entry: uv run cytoscnpy . --ipynb-cells
+        language: system
+        types: [python]
+        pass_filenames: false
+
+      - id: cytoscnpy-deps
+        name: cytoscnpy dependency analysis
+        entry: uv run cytoscnpy deps . --ignore-missing __future__
+        language: system
+        types: [python]
+        pass_filenames: false
+        stages: [push]
+
+      - id: cytoscnpy-github
+        name: cytoscnpy GitHub annotations
+        entry: uv run cytoscnpy . --ipynb-cells --format github
+        language: system
+        types: [python]
+        pass_filenames: false
+        stages: [manual]
+
+      - id: cytoscnpy-gitlab
+        name: cytoscnpy GitLab Code Quality
+        entry: uv run cytoscnpy . --ipynb-cells --format gitlab
+        language: system
+        types: [python]
+        pass_filenames: false
+        stages: [manual]
+
+      - id: cytoscnpy-markdown
+        name: cytoscnpy Markdown report
+        entry: uv run cytoscnpy . --ipynb-cells --format markdown
+        language: system
+        types: [python]
+        pass_filenames: false
+        stages: [manual]
+
+      - id: cytoscnpy-sarif
+        name: cytoscnpy SARIF report
+        entry: uv run cytoscnpy . --ipynb-cells --format sarif
+        language: system
+        types: [python]
+        pass_filenames: false
+        stages: [manual]

@@ -274,6 +274,19 @@ wheels = [
 ]
 
 [[package]]
+name = "cytoscnpy"
+version = "1.2.23"
+source = { registry = "https://pypi.org/simple" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/22/e8/c1971839a545219caf9217e157f4e2add08bf63c0241b5d7d4f5a44b0a91/cytoscnpy-1.2.23-cp312-cp312-macosx_11_0_arm64.whl", hash = "sha256:431b0f4dcd734104ef7ccc3ba832757b504aa33014a509e42f204cdd9f522609", size = 2368600, upload-time = "2026-05-24T15:35:08.534Z" },
+    { url = "https://files.pythonhosted.org/packages/07/ac/ed4adb06086343ac3be6d7d90b69bbceafe9caa673f80476b753e06dc679/cytoscnpy-1.2.23-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:8d6f2c4d52eeb26424cb5a288b9cf7e2a70f7a0d9a4fce2f9714c3ddf3fcf32a", size = 2621048, upload-time = "2026-05-24T15:35:09.752Z" },
+    { url = "https://files.pythonhosted.org/packages/76/59/657f18d9c28cbb37c330c88379d87c4389db099a78126a2f94d903e2bb2e/cytoscnpy-1.2.23-cp312-cp312-win_amd64.whl", hash = "sha256:7092aed7fc3671787a8ebb3e68c5c04796e0e9998a0c400891394d184f5c3095", size = 2356113, upload-time = "2026-05-24T15:35:11.173Z" },
+    { url = "https://files.pythonhosted.org/packages/07/7e/b509d51301904cf56d475b0811c003ca7c3aa7a1fd6b18bc70f28cb6efa8/cytoscnpy-1.2.23-cp313-cp313-macosx_11_0_arm64.whl", hash = "sha256:35a5e63d24bf07ad2156b86bb4de336a0a7c6930aed90870b89a80c8fee935b5", size = 2368686, upload-time = "2026-05-24T15:35:12.783Z" },
+    { url = "https://files.pythonhosted.org/packages/18/27/496fc126e714fa8bfe927e135721697da5f842d7ad02c771e4894c540098/cytoscnpy-1.2.23-cp313-cp313-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:a0e0f8909275f6d389256ba4d63dd594758007f2afab0160fb276a5897009909", size = 2621408, upload-time = "2026-05-24T15:35:14.328Z" },
+    { url = "https://files.pythonhosted.org/packages/9b/cf/1845247571fbc1a8886298ff5dc562970c74845c9d41968bdcad619a99e4/cytoscnpy-1.2.23-cp313-cp313-win_amd64.whl", hash = "sha256:9c0b6e1d58f202f282d3a3483b9c62c155100e1569fe442e1878ee84a3ebdd57", size = 2355765, upload-time = "2026-05-24T15:35:15.748Z" },
+]
+
+[[package]]
 name = "defusedxml"
 version = "0.7.1"
 source = { registry = "https://pypi.org/simple" }
@@ -889,6 +902,7 @@ dev = [
     { name = "bandit" },
     { name = "basedpyright" },
     { name = "beartype" },
+    { name = "cytoscnpy" },
     { name = "detect-secrets" },
     { name = "gitingest" },
     { name = "hypothesis" },
@@ -910,6 +924,7 @@ requires-dist = [
     { name = "bandit", marker = "extra == 'dev'", specifier = ">=1.9.2" },
     { name = "basedpyright", marker = "extra == 'dev'", specifier = ">=1.37.1" },
     { name = "beartype", marker = "extra == 'dev'", specifier = ">=0.22.9" },
+    { name = "cytoscnpy", marker = "extra == 'dev'", specifier = ">=1.2.23" },
     { name = "detect-secrets", marker = "extra == 'dev'", specifier = ">=1.5.0" },
     { name = "gitingest", marker = "extra == 'dev'" },
     { name = "hypothesis", marker = "extra == 'dev'", specifier = ">=6.150.0" },

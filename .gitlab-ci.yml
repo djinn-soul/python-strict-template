@@ -55,6 +55,7 @@ dead-code:
   script:
     - uv run vulture src/ --min-confidence 60
     - uv run pyscn check .
+    - uv run poe cytoscnpy-gitlab
 
 duplication:
   stage: quality

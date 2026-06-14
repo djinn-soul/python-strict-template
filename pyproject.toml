@@ -36,6 +36,7 @@ dev = [
 
     # Advanced Static Analysis
     "basedpyright>=1.37.1",
+    "cytoscnpy>=1.2.23",
     "vulture>=2.14",
     "pyscn",
     "ty",
@@ -367,6 +368,14 @@ security-semgrep = { cmd = "semgrep scan --config auto --config .semgrep/ --erro
 security-audit = { cmd = "pip-audit", help = "Audit dependencies" }
 security-secrets = { cmd = "detect-secrets scan --all-files --exclude-files '(.venv|uv.lock|.ruff_cache|.pytest_cache|.*\\.egg-info|build|dist)'", help = "Scan for secrets" }
 
+# --- STATIC ANALYSIS ---
+cytoscnpy = { cmd = "cytoscnpy . --ipynb-cells", help = "Run CytoScnPy static analysis" }
+cytoscnpy-deps = { cmd = "cytoscnpy deps . --ignore-missing __future__", help = "Run CytoScnPy dependency analysis" }
+cytoscnpy-github = { cmd = "cytoscnpy . --ipynb-cells --format github", help = "Run CytoScnPy with GitHub annotations" }
+cytoscnpy-gitlab = { cmd = "cytoscnpy . --ipynb-cells --format gitlab", help = "Run CytoScnPy with GitLab Code Quality output" }
+cytoscnpy-markdown = { cmd = "cytoscnpy . --ipynb-cells --format markdown", help = "Run CytoScnPy with Markdown output" }
+cytoscnpy-sarif = { cmd = "cytoscnpy . --ipynb-cells --format sarif", help = "Run CytoScnPy with SARIF output" }
+
 # --- TESTING ---
 test = { cmd = "pytest --cov=src --cov-report=term-missing", help = "Run tests with coverage" }
 test-fast = { cmd = "pytest", help = "Run tests without coverage" }
@@ -384,6 +393,7 @@ quality = { sequence = [
     "format",
     "typecheck",
     "security",
+    "cytoscnpy",
     "duplicate",
     { cmd = "pyscn check ." },
     { cmd = "vulture src/ --min-confidence 60" },
@@ -396,3 +406,78 @@ setup = { sequence = [
     { cmd = "prek install" },
 ], help = "Full project setup" }
 clean = { cmd = "python scripts/clean.py", help = "Clean build artifacts" }
+
+[tool.cytoscnpy]
+confidence = 60
+secrets = true
+danger = true
+quality = true
+include_tests = true
+include_ipynb = true
+project_type = "library"
+max_complexity = 10
+max_nesting = 3
+max_args = 5
+max_lines = 50
+min_mi = 40.0
+exclude_folders = [
+    ".git",
+    ".hypothesis",
+    ".mypy_cache",
+    ".pytest_cache",
+    ".ruff_cache",
+    ".tox",
+    ".venv",
+    "__pycache__",
+    "build",
+    "dist",
+    "htmlcov",
+    "node_modules",
+]
+include_folders = ["src", "tests", "scripts"]
+per-file-ignores = { "scripts/jscpd.py" = ["CSP-D702"], "vulture_whitelist.py" = ["CSP-L001"] }
+clones = true
+clone_similarity = 0.8
+fail_threshold = 10.0
+
+[tool.cytoscnpy.secrets_config]
+entropy_threshold = 4.5
+min_length = 16
+entropy_enabled = true
+scan_comments = true
+skip_docstrings = false
+min_score = 50
+suspicious_names = [
+    "api_key",
+    "auth_token",
+    "client_secret",
+    "db_password",
+    "oauth_token",
+    "private_key",
+    "secret_key",
+]
+
+[[tool.cytoscnpy.secrets_config.patterns]]
+name = "Generic Bearer Token"
+regex = "Bearer\\s+[A-Za-z0-9._~+/-]+=*"
+severity = "HIGH"
+
+[tool.cytoscnpy.danger_config]
+enable_taint = true
+severity_threshold = "LOW"
+excluded_rules = []
+custom_sources = [
+    "builtins.input",
+    "os.environ.get",
+    "sys.argv",
+]
+custom_sinks = [
+    "eval",
+    "exec",
+    "os.system",
+    "subprocess.run",
+]
+custom_sanitizers = [
+    "html.escape",
+    "shlex.quote",
+]
